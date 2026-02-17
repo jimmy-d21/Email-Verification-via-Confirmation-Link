@@ -29,3 +29,12 @@ export const signup = (req, res) => {
     });
   });
 };
+
+export const verifyEmail = (req, res) => {
+  const { id } = req.params;
+  const sql = "UPDATE users SET is_verified = true WHERE id = ?";
+  db.query(sql, [id], (err) => {
+    if (err) return res.status(500).send(err);
+    res.send("Email verified successfully!");
+  });
+};
